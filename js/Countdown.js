@@ -1,0 +1,1 @@
+var foo,seconds=14;function redirect(){window.open("http://hplv.pw","_top")}function updateSecs(){document.getElementById("seconds").innerHTML=seconds,-1==--seconds&&(clearInterval(foo),redirect())}function countdownTimer(){foo=setInterval(function(){updateSecs()},966)}countdownTimer();
