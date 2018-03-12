@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hplv.pw/"/>
-  <updated>2018-03-12T11:12:23.330Z</updated>
+  <updated>2018-03-12T11:28:27.037Z</updated>
   <id>https://hplv.pw/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://hplv.pw/posts/hello-world/"/>
     <id>https://hplv.pw/posts/hello-world/</id>
     <published>2018-03-05T11:58:30.295Z</published>
-    <updated>2018-03-12T11:12:23.330Z</updated>
+    <updated>2018-03-12T11:28:27.037Z</updated>
     
     <content type="html"><![CDATA[<p>博客迁移到 hexo 。</p><a id="more"></a><h1 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h1><p>同时部署到github与coding.io</p><h1 id="图床"><a href="#图床" class="headerlink" title="图床"></a>图床</h1><p>使用微博，qcloud，qiniu</p><h1 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h1><p>使用indigo</p><h1 id="评论"><a href="#评论" class="headerlink" title="评论"></a>评论</h1><p>使用valine</p><h1 id="统计"><a href="#统计" class="headerlink" title="统计"></a>统计</h1><p>使用不蒜子</p><h1 id="看板娘"><a href="#看板娘" class="headerlink" title="看板娘"></a>看板娘</h1><p>使用插件hexo-helper-live2d<br>模型live2d-widget-model-ni-j</p>]]></content>
     
