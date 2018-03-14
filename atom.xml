@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hplv.pw/"/>
-  <updated>2018-03-12T11:28:27.037Z</updated>
+  <updated>2018-03-14T13:33:23.847Z</updated>
   <id>https://hplv.pw/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Polya计数法</title>
+    <link href="https://hplv.pw/posts/polya/"/>
+    <id>https://hplv.pw/posts/polya/</id>
+    <published>2018-03-14T07:03:56.000Z</published>
+    <updated>2018-03-14T13:33:23.847Z</updated>
+    
+    <content type="html"><![CDATA[<p>OI中常常遇到这样一类问题，我们需要计算本质不同的方案数量，polya便是解决这类计数问题的一种很好的方法。</p><a id="more"></a><h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><h2 id="群"><a href="#群" class="headerlink" title="群"></a>群</h2><p>给定一个集合 $ G = {a,b,c,…} $ 和集合 $ G $ 上的二元运算 $ * $ ，并满足封闭性，结合律，对每个存在单位元和逆元。</p><h2 id="置换"><a href="#置换" class="headerlink" title="置换"></a>置换</h2><p>$n$ 个元素，每个元素被 $1 - n$ 中的某个元素取代，这些元素互不相同，称作一个置换。<br>比如 $(1, 2, 3, 4) = (2, 3, 1, 4)$ 就是一个置换。</p><h2 id="置换群"><a href="#置换群" class="headerlink" title="置换群"></a>置换群</h2><p>所有满足条件的置换构成的集合称做一个群，可以证明这个集合满足群的所有条件。</p><h1 id="Burnside定理"><a href="#Burnside定理" class="headerlink" title="Burnside定理"></a>Burnside定理</h1><p>Burnside定理是Polya的基础。<br>用 $D(a_j)$ 表示在置换 $a_j$ 下不变的元素的个数。$L$ 表示本质不同的方案数。<br>$$ L = \frac{1}{|G|}\sum_{j = 1}^{s}D(a_j) $$</p><h1 id="Polya计数法"><a href="#Polya计数法" class="headerlink" title="Polya计数法"></a>Polya计数法</h1><p>对于Burnside定理，一般情况下置换群 $|s|$ 是相当大的值，多数情况下是 $np$ 级别。</p><h2 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h2><p>$(a_1, a_2…a_n) = (a_n, a_1…a_{n - 1})$ 是一个 $n$ 阶循环，可以直接表示为 $(a_1, a_2…a_n)$。<br>可以发现，每个置换都是由一个或多个循环组成的。</p><h2 id="推导"><a href="#推导" class="headerlink" title="推导"></a>推导</h2><p>易知，对于一个循环置换不变的子集，所有元素的染色必然相同，当有m种颜色时，对于循环节个数为c(g)的置换g有 $m ^ c(g)$ 中方案。</p><h2 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h2><p>$$ L = \frac{1}{|G|}\sum_{i = 1}^{|s|}m ^ {c(g_i)} $$</p><h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><h2 id="Transportation-is-fun"><a href="#Transportation-is-fun" class="headerlink" title="Transportation is fun"></a>Transportation is fun</h2><p><a href="http://www.spoj.com/problems/TRANSP2/" target="_blank" rel="noopener">SPOJ TRANSP2</a></p><h3 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h3><p>把一个矩阵变为它的转置，每次可以交换两个元素，求最小操作次数。</p><h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>一个位置用二进制坐标 $(i, j)_2$ 表示，转置之后变为 $(j, i)_2$ 。<br>可以发现，当把 $i$ 看作 $a$ 位的二进制数， $j$ 看作 $b$ 位的二进制数， $ij$ 连接在一起看作一个 $a+b$ 位的二进制数，转置就可以理解为一个二进制数循环移动了 $b$ 位。<br>原题转化为，对于 $[0,2^{a + b})$ ，每次交换两个数，求把原位置上的数变成循环移动 $b$ 位的数需要多少次操作。<br>很容易想到，每次直接把原数交换到对应的位置上，在从交换过来的位置上继续交换，直到循环回到原位置，这样操作是最优的。操作次数为循环的长度减一，设循环节有 $d$ 个，则一共需要交换 $2 ^ {a + b} - d$ 次。<br>容易发现，每个循环节内，地址对于循环移动 $b, 2b, 3b…$ 是本质相同的，问题转化为对于b的倍数的循环移动本质相同的地址个数。<br>易得循环节长度为 $lcm(b, a + b) / b$ ，循环节个数为 $gcd(b, a + b)$ 。<br>把这 $gcd(b, a + b)$ 个循环节绑在一起，问题转化为对有 $lcm(b, a + b) / b$ 个点的环，每个点的数范围为 $[0, 2 ^ {gcd(b, a + b)}) $, 在旋转的情况下本质相同的方案数。</p><h2 id="Sgu282-Isomorphism"><a href="#Sgu282-Isomorphism" class="headerlink" title="Sgu282 Isomorphism"></a>Sgu282 Isomorphism</h2><p><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=1478" target="_blank" rel="noopener">BZOJ1478</a></p><h3 id="题意-1"><a href="#题意-1" class="headerlink" title="题意"></a>题意</h3><p>用 M 种颜色对 N 个结点的无向完全图边染色。若两个已染色的图，其中一个图可以通过结点重新编号而与另一个图完全相同，就称这两个染色方案相同。问有多少种本质不同的染色方法。</p><h3 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h3><p>边肯定是没法拿来枚举的，我们可以枚举点的置换来看对边有什么影响。但是 N = 53 ，复杂度肯定吃不消，所以我们需要换一种枚举方式，可以发现，其实点的顺序并不影响统计答案，所以我们只需要枚举每一种循环节长度的组合并且计算这个组合对应的点置换个数。对于每种组合 $n=c_1n_1+c_2n_2+…+c_kn_k$（ $c_i$ 表示元素数量为 $n_i$ 的环的个数）, $n$ 个节点的全排列有 $n!$ 种方案，其中每个环 $i$ 被重复计算了 $n_i!$ 次，固定一个点剩下的点有 $(ni-1)!$ 种排列情况，重复计算了 $n_i$ 次，也可以参考圆排列来理解这里。对于元素数量相同的环，重复计算了 $c_i!$ 次，所以这种组合对应的置换群个数为 $\frac{n!}{n_1^{c_1}n_2^{c_2}…n_k^{c_k}c1!c2!…ck!}$ 。<br>有了枚举点置换的方法，我们可以来考虑点置换与边置换的关系。<br>对于一个循环节内部的点，一共有 $\lfloor\frac{n}{2}\rfloor$ 个边循环节。对于两个循环节之间的点，设循环节大小分别为 $a, b$ ，一共有 $gcd(a, b)$ 个边循环节。<br>综合以上，可以得到答案。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;OI中常常遇到这样一类问题，我们需要计算本质不同的方案数量，polya便是解决这类计数问题的一种很好的方法。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="OI, math, polya" scheme="https://hplv.pw/tags/OI-math-polya/"/>
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
