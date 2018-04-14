@@ -1,4 +1,509 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="canonical" href="https://hplv.pw/posts/polya/"><title>Polya计数法 | HPL&#39;s Blog | Your prologue will be the story.</title><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="theme-color" content="#3F51B5"><meta name="keywords" content="OI,math,polya"><meta name="description" content="OI中常常遇到这样一类问题，我们需要计算本质不同的方案数量，polya便是解决这类计数问题的一种很好的方法。"><meta name="keywords" content="OI,math,polya"><meta property="og:type" content="article"><meta property="og:title" content="Polya计数法"><meta property="og:url" content="https://hplv.pw/posts/polya/index.html"><meta property="og:site_name" content="HPL&#39;s Blog"><meta property="og:description" content="OI中常常遇到这样一类问题，我们需要计算本质不同的方案数量，polya便是解决这类计数问题的一种很好的方法。"><meta property="og:locale" content="zh-CN"><meta property="og:updated_time" content="2018-03-14T13:50:37.971Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Polya计数法"><meta name="twitter:description" content="OI中常常遇到这样一类问题，我们需要计算本质不同的方案数量，polya便是解决这类计数问题的一种很好的方法。"><link rel="alternate" type="application/atom+xml" title="HPL&#39;s Blog" href="/atom.xml"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="stylesheet" href="/css/style.css?v=1.7.2"><script>window.lazyScripts=[]</script></head><body><div id="loading" class="active"></div><aside id="menu" class="hide"><div class="inner flex-row-vertical"><a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off"><i class="icon icon-lg icon-close"></i></a><div class="brand-wrap" style="background-image:url(/img/brand.jpg)"><div class="brand"><a href="/" class="avatar waves-effect waves-circle waves-light"><img src="/img/avatar.jpg"></a><hgroup class="introduce"><h5 class="nickname">Henry Li</h5><a href="mailto:1069201654@qq.com" title="1069201654@qq.com" class="mail">1069201654@qq.com</a></hgroup></div></div><div class="scroll-wrap flex-col"><ul class="nav"><li class="waves-block waves-effect"><a href="/"><i class="icon icon-lg icon-home"></i> 主页</a></li><li class="waves-block waves-effect"><a href="/archives"><i class="icon icon-lg icon-archives"></i> Archives</a></li><li class="waves-block waves-effect"><a href="/tags"><i class="icon icon-lg icon-tags"></i> Tags</a></li><li class="waves-block waves-effect"><a href="https://github.com/HPLV" target="_blank"><i class="icon icon-lg icon-github"></i> Github</a></li><li class="waves-block waves-effect"><a href="https://space.bilibili.com/35761486" target="_blank"><i class="icon icon-lg icon-tv"></i> Bilibili</a></li><li class="waves-block waves-effect"><a href="/friends"><i class="icon icon-lg icon-link"></i> 友链</a></li></ul></div></div></aside><main id="main"><header class="top-header" id="header"><div class="flex-row"><a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle"><i class="icon icon-lg icon-navicon"></i></a><div class="flex-col header-title ellipsis">Polya计数法</div><div class="search-wrap" id="search-wrap"><a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back"><i class="icon icon-lg icon-chevron-left"></i> </a><input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字"> <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search"><i class="icon icon-lg icon-search"></i></a></div><a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare"><i class="icon icon-lg icon-share-alt"></i></a></div></header><header class="content-header post-header"><div class="container fade-scale"><h1 class="title">Polya计数法</h1><h5 class="subtitle"><time datetime="2018-03-14T07:03:56.000Z" itemprop="datePublished" class="page-time">2018-03-14</time></h5></div></header><div class="container body-wrap"><aside class="post-widget"><nav class="post-toc-wrap post-toc-shrink" id="post-toc"><h4>TOC</h4><ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#概念"><span class="post-toc-number">1.</span> <span class="post-toc-text">概念</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#群"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">群</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#置换"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">置换</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#置换群"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">置换群</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Burnside定理"><span class="post-toc-number">2.</span> <span class="post-toc-text">Burnside定理</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Polya计数法"><span class="post-toc-number">3.</span> <span class="post-toc-text">Polya计数法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#循环"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">循环</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#推导"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">推导</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#公式"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">公式</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#应用"><span class="post-toc-number">4.</span> <span class="post-toc-text">应用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Transportation-is-fun"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">Transportation is fun</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#题意"><span class="post-toc-number">4.1.1.</span> <span class="post-toc-text">题意</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#题解"><span class="post-toc-number">4.1.2.</span> <span class="post-toc-text">题解</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Sgu282-Isomorphism"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">Sgu282 Isomorphism</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#题意-1"><span class="post-toc-number">4.2.1.</span> <span class="post-toc-text">题意</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#题解-1"><span class="post-toc-number">4.2.2.</span> <span class="post-toc-text">题解</span></a></li></ol></li></ol></li></ol></nav></aside><article id="post-polya" class="post-article article-type-post fade" itemprop="blogPost"><div class="post-card"><h1 class="post-card-title">Polya计数法</h1><div class="post-meta"><time class="post-time" title="2018-03-14 15:03:56" datetime="2018-03-14T07:03:56.000Z" itemprop="datePublished">2018-03-14</time> <span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none"><i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span></span></div><div class="post-content" id="post-content" itemprop="postContent"><p>OI中常常遇到这样一类问题，我们需要计算本质不同的方案数量，polya便是解决这类计数问题的一种很好的方法。</p><a id="more"></a><h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><h2 id="群"><a href="#群" class="headerlink" title="群"></a>群</h2><p>给定一个集合 $ G = {a,b,c,…} $ 和集合 $ G $ 上的二元运算 $ * $ ，并满足封闭性，结合律，对每个存在单位元和逆元。</p><h2 id="置换"><a href="#置换" class="headerlink" title="置换"></a>置换</h2><p>$n$ 个元素，每个元素被 $1 - n$ 中的某个元素取代，这些元素互不相同，称作一个置换。<br>比如 $(1, 2, 3, 4) = (2, 3, 1, 4)$ 就是一个置换。</p><h2 id="置换群"><a href="#置换群" class="headerlink" title="置换群"></a>置换群</h2><p>所有满足条件的置换构成的集合称做一个群，可以证明这个集合满足群的所有条件。</p><h1 id="Burnside定理"><a href="#Burnside定理" class="headerlink" title="Burnside定理"></a>Burnside定理</h1><p>Burnside定理是Polya的基础。<br>用 $D(a_j)$ 表示在置换 $a_j$ 下不变的元素的个数。$L$ 表示本质不同的方案数。<br>$$ L = \frac{1}{|G|}\sum_{j = 1}^{s}D(a_j) $$</p><h1 id="Polya计数法"><a href="#Polya计数法" class="headerlink" title="Polya计数法"></a>Polya计数法</h1><p>对于Burnside定理，一般情况下置换群 $|s|$ 是相当大的值，多数情况下是 $np$ 级别。</p><h2 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h2><p>$(a_1, a_2…a_n) = (a_n, a_1…a_{n - 1})$ 是一个 $n$ 阶循环，可以直接表示为 $(a_1, a_2…a_n)$。<br>可以发现，每个置换都是由一个或多个循环组成的。</p><h2 id="推导"><a href="#推导" class="headerlink" title="推导"></a>推导</h2><p>易知，对于一个循环置换不变的子集，所有元素的染色必然相同，当有m种颜色时，对于循环节个数为c(g)的置换g有 $m ^ c(g)$ 中方案。</p><h2 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h2><p>$$ L = \frac{1}{|G|}\sum_{i = 1}^{|s|}m ^ {c(g_i)} $$</p><h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><h2 id="Transportation-is-fun"><a href="#Transportation-is-fun" class="headerlink" title="Transportation is fun"></a>Transportation is fun</h2><p><a href="http://www.spoj.com/problems/TRANSP2/" target="_blank" rel="noopener">SPOJ TRANSP2</a></p><h3 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h3><p>把一个矩阵变为它的转置，每次可以交换两个元素，求最小操作次数。</p><h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>一个位置用二进制坐标 $(i, j)_2$ 表示，转置之后变为 $(j, i)_2$ 。<br>可以发现，当把 $i$ 看作 $a$ 位的二进制数， $j$ 看作 $b$ 位的二进制数， $ij$ 连接在一起看作一个 $a+b$ 位的二进制数，转置就可以理解为一个二进制数循环移动了 $b$ 位。<br>原题转化为，对于 $[0,2^{a + b})$ ，每次交换两个数，求把原位置上的数变成循环移动 $b$ 位的数需要多少次操作。<br>很容易想到，每次直接把原数交换到对应的位置上，在从交换过来的位置上继续交换，直到循环回到原位置，这样操作是最优的。操作次数为循环的长度减一，设循环节有 $d$ 个，则一共需要交换 $2 ^ {a + b} - d$ 次。<br>容易发现，每个循环节内，地址对于循环移动 $b, 2b, 3b…$ 是本质相同的，问题转化为对于b的倍数的循环移动本质相同的地址个数。<br>易得循环节长度为 $lcm(b, a + b) / b$ ，循环节个数为 $gcd(b, a + b)$ 。<br>把这 $gcd(b, a + b)$ 个循环节绑在一起，问题转化为对有 $lcm(b, a + b) / b$ 个点的环，每个点的数范围为 $[0, 2 ^ {gcd(b, a + b)}) $, 在旋转的情况下本质相同的方案数。</p><h2 id="Sgu282-Isomorphism"><a href="#Sgu282-Isomorphism" class="headerlink" title="Sgu282 Isomorphism"></a>Sgu282 Isomorphism</h2><p><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=1478" target="_blank" rel="noopener">BZOJ1478</a></p><h3 id="题意-1"><a href="#题意-1" class="headerlink" title="题意"></a>题意</h3><p>用 M 种颜色对 N 个结点的无向完全图边染色。若两个已染色的图，其中一个图可以通过结点重新编号而与另一个图完全相同，就称这两个染色方案相同。问有多少种本质不同的染色方法。</p><h3 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h3><p>边肯定是没法拿来枚举的，我们可以枚举点的置换来看对边有什么影响。但是 N = 53 ，复杂度肯定吃不消，所以我们需要换一种枚举方式，可以发现，其实点的顺序并不影响统计答案，所以我们只需要枚举每一种循环节长度的组合并且计算这个组合对应的点置换个数。对于每种组合 $n=c_1n_1+c_2n_2+…+c_kn_k$（ $c_i$ 表示元素数量为 $n_i$ 的环的个数）, $n$ 个节点的全排列有 $n!$ 种方案，其中每个环 $i$ 被重复计算了 $n_i!$ 次，固定一个点剩下的点有 $(ni-1)!$ 种排列情况，重复计算了 $n_i$ 次，也可以参考圆排列来理解这里。对于元素数量相同的环，重复计算了 $c_i!$ 次，所以这种组合对应的置换群个数为 $\cfrac{n!}{n_1^{c_1}n_2^{c_2}…n_k^{c_k}c1!c2!…ck!}$ 。<br>有了枚举点置换的方法，我们可以来考虑点置换与边置换的关系。<br>对于一个循环节内部的点，一共有 $\lfloor\frac{n}{2}\rfloor$ 个边循环节。对于两个循环节之间的点，设循环节大小分别为 $a, b$ ，一共有 $gcd(a, b)$ 个边循环节。<br>综合以上，可以得到答案。</p></div><blockquote class="post-copyright"><div class="content"><span class="post-time">最后更新时间：<time datetime="2018-03-14T13:50:37.971Z" itemprop="dateUpdated">2018-03-14 21:50:37</time></span><br>欢迎分享，转载请注明出处~<br>原始链接：<a href="/posts/polya/" target="_blank" rel="external">https://hplv.pw/posts/polya/</a></div><footer><a href="https://hplv.pw"><img src="/img/avatar.jpg" alt="Henry Li"> Henry Li</a></footer></blockquote><div class="page-reward"><a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a></div><div class="post-footer"><ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OI/">OI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/math/">math</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/polya/">polya</a></li></ul><div class="page-share-wrap"><div class="page-share" id="pageShare"><ul class="reset share-icons"><li><a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hplv.pw/posts/polya/&title=《Polya计数法》 — HPL's Blog&pic=https://hplv.pw/img/avatar.jpg" data-title="微博"><i class="icon icon-weibo"></i></a></li><li><a class="weixin share-sns wxFab" href="javascript:;" data-title="微信"><i class="icon icon-weixin"></i></a></li><li><a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hplv.pw/posts/polya/&title=《Polya计数法》 — HPL's Blog&source=OI中常常遇到这样一类问题，我们需要计算本质不同的方案数量，polya便是解决这类计数问题的一种很好的方法。" data-title=" QQ"><i class="icon icon-qq"></i></a></li><li><a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hplv.pw/posts/polya/" data-title=" Facebook"><i class="icon icon-facebook"></i></a></li><li><a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Polya计数法》 — HPL's Blog&url=https://hplv.pw/posts/polya/&via=https://hplv.pw" data-title=" Twitter"><i class="icon icon-twitter"></i></a></li><li><a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hplv.pw/posts/polya/" data-title=" Google+"><i class="icon icon-google-plus"></i></a></li></ul></div><a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle"><i class="icon icon-share-alt icon-lg"></i></a></div></div></div><nav class="post-nav flex-row flex-justify-between flex-row-reverse"><div class="waves-block waves-effect next"><a href="/posts/hello-world/" id="post-next" class="post-nav-link"><div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div><h4 class="title">Hello World</h4></a></div></nav><div class="comments vcomment" id="comments"></div><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="//hplv.pw/js/Valine.min.js"></script><script>var GUEST_INFO=["nick","mail","link"],guest_info="nick,mail".split(",").filter(function(e){return-1<GUEST_INFO.indexOf(e)});new Valine({el:"#comments",notify:!1,verify:!0,appId:"Dy31A6j7EMCeMp5SRA30XJmu-gzGzoHsz",appKey:"R2w4BmVM5zkQdctt8fyOjyWs",avatar:"identicon",placeholder:"蒟蒻求怼QAQ~~",guest_info:0==guest_info.length?GUEST_INFO:guest_info,pageSize:"10"})</script></article><div id="reward" class="page-modal reward-lay"><a class="close" href="javascript:;"><i class="icon icon-close"></i></a><h3 class="reward-title"><i class="icon icon-quote-left"></i> ORZ dalao~ <i class="icon icon-quote-right"></i></h3><div class="reward-content"><div class="reward-code"><img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码"></div><label class="reward-toggle"><input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg"><div class="reward-toggle-ctrol"><span class="reward-toggle-item wechat">微信</span> <span class="reward-toggle-label"></span> <span class="reward-toggle-item alipay">支付宝</span></div></label></div></div></div><footer class="footer"><div class="top"><p><span id="busuanzi_container_site_uv" style="display:none">站点总访客数：<span id="busuanzi_value_site_uv"></span> </span><span id="busuanzi_container_site_pv" style="display:none">站点总访问量：<span id="busuanzi_value_site_pv"></span></span></p><p><span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span> <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span></p></div><div class="bottom"><p><span>Henry Li &copy; 2018</span> <span>Power by <a href="http://hexo.io/" target="_blank" style="font-weight:700">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank" style="font-weight:700">indigo</a> Hosted by <a href="https://pages.coding.me" style="font-weight:700">Coding Pages</a></span></p></div></footer></main><div class="mask" id="mask"></div><a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a><div class="global-share" id="globalShare"><ul class="reset share-icons"><li><a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hplv.pw/posts/polya/&title=《Polya计数法》 — HPL's Blog&pic=https://hplv.pw/img/avatar.jpg" data-title="微博"><i class="icon icon-weibo"></i></a></li><li><a class="weixin share-sns wxFab" href="javascript:;" data-title="微信"><i class="icon icon-weixin"></i></a></li><li><a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hplv.pw/posts/polya/&title=《Polya计数法》 — HPL's Blog&source=OI中常常遇到这样一类问题，我们需要计算本质不同的方案数量，polya便是解决这类计数问题的一种很好的方法。" data-title=" QQ"><i class="icon icon-qq"></i></a></li><li><a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hplv.pw/posts/polya/" data-title=" Facebook"><i class="icon icon-facebook"></i></a></li><li><a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Polya计数法》 — HPL's Blog&url=https://hplv.pw/posts/polya/&via=https://hplv.pw" data-title=" Twitter"><i class="icon icon-twitter"></i></a></li><li><a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hplv.pw/posts/polya/" data-title=" Google+"><i class="icon icon-google-plus"></i></a></li></ul></div><div class="page-modal wx-share" id="wxShare"><a class="close" href="javascript:;"><i class="icon icon-close"></i></a><p>扫一扫，分享到微信</p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABwklEQVR42u3aS44DIQwFwNz/0j3bkaIhz3ZDklGxauUDRS8ssP14xON6Gs+f5//6/e1jx8DFxR1zr+VIuMn8yfPagIuLe56bL1MFTebHxcX9Fu5fh5X1IWa9DVxc3P/EzcPWenu4uLifyU0uP+vN5NenQ3c1XFzcATfPUu573pLfxcXFbXGv4kgCWf5teXVcXNwj3Go5pLpw78LzIuGCi4u7mdtLTPRKLNUj1Iv3iouLu5nba7+oUnrzl09kuLi4Y25vsUn7xSS04eLinuT28qx3pU7KjR24uLibub3CZxWdXKKi0ImLi3ucmy85ubpEkTUJZLi4uJu5+UTJ73sl2OR14OLinuRWDyV5OEs2X/gXLi7uEe68iSq/xuQl2Bcz4+LiHuT2DiLVJozCgWYdyHBxcQ9ye2nTcovV5HXg4uK+lVttlciLJXnjRbQYLi7urdyrOPKwNQ9zuLi47+L22rAm6dRC+qMVUnFxce/iVlOivedke+XLDy4u7mZutaSRF1nz1Gq58oOLi/uR3GpapNfsdVsgw8XF3cytpjYmSRBcXNx3ceftmNUaTjNpgouLe4RbDSV5Ubaa+JiXe3FxccfcHxcDcbCp1ZeFAAAAAElFTkSuQmCC" alt="微信分享二维码"></div><script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script><script>var BLOG={ROOT:"/",SHARE:!0,REWARD:!0}</script><script src="/js/main.min.js?v=1.7.2"></script><div class="search-panel" id="search-panel"><ul class="search-result" id="search-result"></ul></div><template id="search-tpl"><li class="item"><a href="{path}" class="waves-block waves-effect"><div class="title ellipsis" title="{title}">{title}</div><div class="flex-row flex-middle"><div class="tags ellipsis">{tags}</div><time class="flex-col time">{date}</time></div></a></li></template><script src="/js/search.min.js?v=1.7.2" async></script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    <link rel="canonical" href="https://hplv.pw/posts/polya/">
+    
+    
+    <title>Polya计数法 | HPL&#39;s Blog | Your prologue will be the story.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="OI,math,polya">
+    <meta name="description" content="OI中常常遇到这样一类问题，我们需要计算本质不同的方案数量，polya便是解决这类计数问题的一种很好的方法。">
+<meta name="keywords" content="OI,math,polya">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Polya计数法">
+<meta property="og:url" content="https://hplv.pw/posts/polya/index.html">
+<meta property="og:site_name" content="HPL&#39;s Blog">
+<meta property="og:description" content="OI中常常遇到这样一类问题，我们需要计算本质不同的方案数量，polya便是解决这类计数问题的一种很好的方法。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-04-14T09:45:29.111Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Polya计数法">
+<meta name="twitter:description" content="OI中常常遇到这样一类问题，我们需要计算本质不同的方案数量，polya便是解决这类计数问题的一种很好的方法。">
+    
+        <link rel="alternate" type="application/atom+xml" title="HPL&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Henry Li</h5>
+          <a href="mailto:1069201654@qq.com" title="1069201654@qq.com" class="mail">1069201654@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/HPLV" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://space.bilibili.com/35761486" target="_blank" >
+                <i class="icon icon-lg icon-tv"></i>
+                Bilibili
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/friends"  >
+                <i class="icon icon-lg icon-link"></i>
+                友链
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Polya计数法</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Polya计数法</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-03-14T07:03:56.000Z" itemprop="datePublished" class="page-time">
+  2018-03-14
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#概念"><span class="post-toc-number">1.</span> <span class="post-toc-text">概念</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#群"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">群</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#置换"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">置换</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#置换群"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">置换群</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Burnside定理"><span class="post-toc-number">2.</span> <span class="post-toc-text">Burnside定理</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Polya计数法"><span class="post-toc-number">3.</span> <span class="post-toc-text">Polya计数法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#循环"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">循环</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#推导"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">推导</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#公式"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">公式</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#应用"><span class="post-toc-number">4.</span> <span class="post-toc-text">应用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Transportation-is-fun"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">Transportation is fun</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#题意"><span class="post-toc-number">4.1.1.</span> <span class="post-toc-text">题意</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#题解"><span class="post-toc-number">4.1.2.</span> <span class="post-toc-text">题解</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Sgu282-Isomorphism"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">Sgu282 Isomorphism</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#题意-1"><span class="post-toc-number">4.2.1.</span> <span class="post-toc-text">题意</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#题解-1"><span class="post-toc-number">4.2.2.</span> <span class="post-toc-text">题解</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-polya"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Polya计数法</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-03-14 15:03:56" datetime="2018-03-14T07:03:56.000Z"  itemprop="datePublished">2018-03-14</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>OI中常常遇到这样一类问题，我们需要计算本质不同的方案数量，polya便是解决这类计数问题的一种很好的方法。</p>
+<a id="more"></a>
+<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><h2 id="群"><a href="#群" class="headerlink" title="群"></a>群</h2><p>给定一个集合 $ G = {a,b,c,…} $ 和集合 $ G $ 上的二元运算 $ * $ ，并满足封闭性，结合律，对每个存在单位元和逆元。</p>
+<h2 id="置换"><a href="#置换" class="headerlink" title="置换"></a>置换</h2><p>$n$ 个元素，每个元素被 $1 - n$ 中的某个元素取代，这些元素互不相同，称作一个置换。<br>比如 $(1, 2, 3, 4) = (2, 3, 1, 4)$ 就是一个置换。</p>
+<h2 id="置换群"><a href="#置换群" class="headerlink" title="置换群"></a>置换群</h2><p>所有满足条件的置换构成的集合称做一个群，可以证明这个集合满足群的所有条件。</p>
+<h1 id="Burnside定理"><a href="#Burnside定理" class="headerlink" title="Burnside定理"></a>Burnside定理</h1><p>Burnside定理是Polya的基础。<br>用 $D(a_j)$ 表示在置换 $a_j$ 下不变的元素的个数。$L$ 表示本质不同的方案数。<br>$$ L = \frac{1}{|G|}\sum_{j = 1}^{s}D(a_j) $$</p>
+<h1 id="Polya计数法"><a href="#Polya计数法" class="headerlink" title="Polya计数法"></a>Polya计数法</h1><p>对于Burnside定理，一般情况下置换群 $|s|$ 是相当大的值，多数情况下是 $np$ 级别。</p>
+<h2 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h2><p>$(a_1, a_2…a_n) = (a_n, a_1…a_{n - 1})$ 是一个 $n$ 阶循环，可以直接表示为 $(a_1, a_2…a_n)$。<br>可以发现，每个置换都是由一个或多个循环组成的。</p>
+<h2 id="推导"><a href="#推导" class="headerlink" title="推导"></a>推导</h2><p>易知，对于一个循环置换不变的子集，所有元素的染色必然相同，当有m种颜色时，对于循环节个数为c(g)的置换g有 $m ^ c(g)$ 中方案。</p>
+<h2 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h2><p>$$ L = \frac{1}{|G|}\sum_{i = 1}^{|s|}m ^ {c(g_i)} $$</p>
+<h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><h2 id="Transportation-is-fun"><a href="#Transportation-is-fun" class="headerlink" title="Transportation is fun"></a>Transportation is fun</h2><p><a href="http://www.spoj.com/problems/TRANSP2/" target="_blank" rel="noopener">SPOJ TRANSP2</a></p>
+<h3 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h3><p>把一个矩阵变为它的转置，每次可以交换两个元素，求最小操作次数。</p>
+<h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>一个位置用二进制坐标 $(i, j)_2$ 表示，转置之后变为 $(j, i)_2$ 。<br>可以发现，当把 $i$ 看作 $a$ 位的二进制数， $j$ 看作 $b$ 位的二进制数， $ij$ 连接在一起看作一个 $a+b$ 位的二进制数，转置就可以理解为一个二进制数循环移动了 $b$ 位。<br>原题转化为，对于 $[0,2^{a + b})$ ，每次交换两个数，求把原位置上的数变成循环移动 $b$ 位的数需要多少次操作。<br>很容易想到，每次直接把原数交换到对应的位置上，在从交换过来的位置上继续交换，直到循环回到原位置，这样操作是最优的。操作次数为循环的长度减一，设循环节有 $d$ 个，则一共需要交换 $2 ^ {a + b} - d$ 次。<br>容易发现，每个循环节内，地址对于循环移动 $b, 2b, 3b…$ 是本质相同的，问题转化为对于b的倍数的循环移动本质相同的地址个数。<br>易得循环节长度为 $lcm(b, a + b) / b$ ，循环节个数为 $gcd(b, a + b)$ 。<br>把这 $gcd(b, a + b)$ 个循环节绑在一起，问题转化为对有 $lcm(b, a + b) / b$ 个点的环，每个点的数范围为 $[0, 2 ^ {gcd(b, a + b)}) $, 在旋转的情况下本质相同的方案数。</p>
+<h2 id="Sgu282-Isomorphism"><a href="#Sgu282-Isomorphism" class="headerlink" title="Sgu282 Isomorphism"></a>Sgu282 Isomorphism</h2><p><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=1478" target="_blank" rel="noopener">BZOJ1478</a></p>
+<h3 id="题意-1"><a href="#题意-1" class="headerlink" title="题意"></a>题意</h3><p>用 M 种颜色对 N 个结点的无向完全图边染色。若两个已染色的图，其中一个图可以通过结点重新编号而与另一个图完全相同，就称这两个染色方案相同。问有多少种本质不同的染色方法。</p>
+<h3 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h3><p>边肯定是没法拿来枚举的，我们可以枚举点的置换来看对边有什么影响。但是 N = 53 ，复杂度肯定吃不消，所以我们需要换一种枚举方式，可以发现，其实点的顺序并不影响统计答案，所以我们只需要枚举每一种循环节长度的组合并且计算这个组合对应的点置换个数。对于每种组合 $n=c_1n_1+c_2n_2+…+c_kn_k$（ $c_i$ 表示元素数量为 $n_i$ 的环的个数）, $n$ 个节点的全排列有 $n!$ 种方案，其中每个环 $i$ 被重复计算了 $n_i!$ 次，固定一个点剩下的点有 $(ni-1)!$ 种排列情况，重复计算了 $n_i$ 次，也可以参考圆排列来理解这里。对于元素数量相同的环，重复计算了 $c_i!$ 次，所以这种组合对应的置换群个数为 $\cfrac{n!}{n_1^{c_1}n_2^{c_2}…n_k^{c_k}c1!c2!…ck!}$ 。<br>有了枚举点置换的方法，我们可以来考虑点置换与边置换的关系。<br>对于一个循环节内部的点，一共有 $\lfloor\frac{n}{2}\rfloor$ 个边循环节。对于两个循环节之间的点，设循环节大小分别为 $a, b$ ，一共有 $gcd(a, b)$ 个边循环节。<br>综合以上，可以得到答案。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-04-14T09:45:29.111Z" itemprop="dateUpdated">2018-04-14 17:45:29</time>
+</span><br>
+
+
+        
+        欢迎分享，转载请注明出处~<br>原始链接：<a href="/posts/polya/" target="_blank" rel="external">https://hplv.pw/posts/polya/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://hplv.pw">
+            <img src="/img/avatar.jpg" alt="Henry Li">
+            Henry Li
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OI/">OI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/math/">math</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/polya/">polya</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hplv.pw/posts/polya/&title=《Polya计数法》 — HPL's Blog&pic=https://hplv.pw/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hplv.pw/posts/polya/&title=《Polya计数法》 — HPL's Blog&source=OI中常常遇到这样一类问题，我们需要计算本质不同的方案数量，polya便是解决这类计数问题的一种很好的方法。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hplv.pw/posts/polya/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Polya计数法》 — HPL's Blog&url=https://hplv.pw/posts/polya/&via=https://hplv.pw" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hplv.pw/posts/polya/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/posts/SCOI2018/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">SCOI2018</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/posts/hello-world/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Hello World</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//hplv.pw/js/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'true' == 'true',
+            appId: "Dy31A6j7EMCeMp5SRA30XJmu-gzGzoHsz",
+            appKey: "R2w4BmVM5zkQdctt8fyOjyWs",
+            avatar: "identicon",
+            placeholder: "蒟蒻求怼QAQ~~",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        ORZ dalao~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Henry Li &copy; 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank" style="font-weight: bold">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank" style="font-weight: bold">indigo</a> Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hplv.pw/posts/polya/&title=《Polya计数法》 — HPL's Blog&pic=https://hplv.pw/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hplv.pw/posts/polya/&title=《Polya计数法》 — HPL's Blog&source=OI中常常遇到这样一类问题，我们需要计算本质不同的方案数量，polya便是解决这类计数问题的一种很好的方法。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hplv.pw/posts/polya/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Polya计数法》 — HPL's Blog&url=https://hplv.pw/posts/polya/&via=https://hplv.pw" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hplv.pw/posts/polya/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABwklEQVR42u3aS44DIQwFwNz/0j3bkaIhz3ZDklGxauUDRS8ssP14xON6Gs+f5//6/e1jx8DFxR1zr+VIuMn8yfPagIuLe56bL1MFTebHxcX9Fu5fh5X1IWa9DVxc3P/EzcPWenu4uLifyU0uP+vN5NenQ3c1XFzcATfPUu573pLfxcXFbXGv4kgCWf5teXVcXNwj3Go5pLpw78LzIuGCi4u7mdtLTPRKLNUj1Iv3iouLu5nba7+oUnrzl09kuLi4Y25vsUn7xSS04eLinuT28qx3pU7KjR24uLibub3CZxWdXKKi0ImLi3ucmy85ubpEkTUJZLi4uJu5+UTJ73sl2OR14OLinuRWDyV5OEs2X/gXLi7uEe68iSq/xuQl2Bcz4+LiHuT2DiLVJozCgWYdyHBxcQ9ye2nTcovV5HXg4uK+lVttlciLJXnjRbQYLi7urdyrOPKwNQ9zuLi47+L22rAm6dRC+qMVUnFxce/iVlOivedke+XLDy4u7mZutaSRF1nz1Gq58oOLi/uR3GpapNfsdVsgw8XF3cytpjYmSRBcXNx3ceftmNUaTjNpgouLe4RbDSV5Ubaa+JiXe3FxccfcHxcDcbCp1ZeFAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
     tex2jax: {
         inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
         processEscapes: true,
@@ -11,4 +516,19 @@ MathJax.Hub.Queue(function() {
     for(i=0; i < all.length; i += 1) {
         all[i].SourceElement().parentNode.className += ' has-jax';
     }
-});</script><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script><script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/ni-j.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false}});</script></body></html>
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/ni-j.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false}});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+</html>
